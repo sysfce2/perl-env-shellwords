@@ -40,7 +40,8 @@ prerequisites.
 
 =head1 CAVEATS
 
-Not especially fast.
+Not especially fast.  C<undef> gets mapped to the empty string C<''>
+since C<undef> doesn't have a meaning as an argument in a string.
 
 =head1 SEE ALSO
 

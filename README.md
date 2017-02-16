@@ -35,7 +35,8 @@ prerequisites.
 
 # CAVEATS
 
-Not especially fast.
+Not especially fast.  `undef` gets mapped to the empty string `''`
+since `undef` doesn't have a meaning as an argument in a string.
 
 # SEE ALSO
 
