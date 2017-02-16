@@ -119,4 +119,6 @@ sub EXISTS
   return exists $list[$key];
 }
 
+sub EXTEND {} # do nothing!
+
 1;
