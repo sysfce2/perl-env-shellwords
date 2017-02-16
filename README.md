@@ -8,7 +8,11 @@ Environment variables for arguments as array
     use Env::ShellWords;
     tie my @CFLAGS,   'CFLAGS';
     tie my @LDFLAGS,  'LDFLAGS';
+
+    # same thing with import interface:
+    use Env::ShellWords qw( @CFLAGS @LDFLAGS );
     
+    # usage:
     unshift @CFLAGS, '-I/foo/include';
     push @CFLAGS, '-DFOO=1';
     

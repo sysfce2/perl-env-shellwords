@@ -10,6 +10,7 @@ my %modules;
 my $post_diag;
 
 $modules{$_} = $_ for qw(
+  Carp
   ExtUtils::MakeMaker
   Test2::Suite
   Test::More

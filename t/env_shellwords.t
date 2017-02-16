@@ -147,4 +147,14 @@ subtest 'exists' => sub {
   is exists($FOO[99]), F();
 };
 
+subtest 'export' => sub {
+
+  use Env::ShellWords qw( @BAR );
+
+  local $ENV{BAR} = 'one two\\ two three four five six';
+
+  is $BAR[1], 'two two';
+
+};
+
 done_testing;

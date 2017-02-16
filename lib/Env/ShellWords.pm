@@ -13,7 +13,11 @@ use Text::ParseWords qw( shellwords );
  use Env::ShellWords;
  tie my @CFLAGS,   'CFLAGS';
  tie my @LDFLAGS,  'LDFLAGS';
+
+ # same thing with import interface:
+ use Env::ShellWords qw( @CFLAGS @LDFLAGS );
  
+ # usage:
  unshift @CFLAGS, '-I/foo/include';
  push @CFLAGS, '-DFOO=1';
  
@@ -153,5 +157,25 @@ sub EXISTS
 }
 
 sub EXTEND {} # do nothing!
+
+sub import
+{
+  my $caller = caller;
+  my(undef, @vars) = @_;
+  foreach my $var (@vars)
+  {
+    if($var =~ s/^\@//)
+    {
+      no strict 'refs';
+      tie my @list, __PACKAGE__, $var;
+      *{"${caller}::${var}"} = \@list;
+    }
+    else
+    {
+      require Carp;
+      Carp::croak("Env::ShellWords does not work with $var");
+    }
+  }
+}
 
 1;
