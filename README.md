@@ -13,8 +13,12 @@ Environment variables for arguments as array
     use Env::ShellWords qw( @CFLAGS @LDFLAGS );
     
     # usage:
+    $ENV{CFLAGS} = '-DBAR=1';
     unshift @CFLAGS, '-I/foo/include';
-    push @CFLAGS, '-DFOO=1';
+    push @CFLAGS, '-DFOO=Define With Spaces';
+    
+    # now:
+    # $ENV{CFLAGS} = '-I/foo/include -DBAR=1 -DFOO=Define\\ With\\ Spaces';
     
     unshift @LDFLAGS, '-L/foo/lib';
     push @LDFLAGS, '-lfoo';
