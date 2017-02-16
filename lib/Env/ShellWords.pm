@@ -7,6 +7,39 @@ use Text::ParseWords qw( shellwords );
 # ABSTRACT: Environment variables for arguments as array
 # VERSION
 
+=head1 SYNOPSIS
+
+ # Tie Interface
+ use Env::ShellWords;
+ tie my @CFLAGS,   'CFLAGS';
+ tie my @LDFLAGS,  'LDFLAGS';
+ 
+ unshift @CFLAGS, '-I/foo/include';
+ push @CFLAGS, '-DFOO=1';
+ 
+ unshift @LDFLAGS, '-L/foo/lib';
+ push @LDFLAGS, '-lfoo';
+
+=head1 DESCRIPTION
+
+This module provides an array like interface to environment variables
+that contain flags.  For example Autoconf can uses the environment
+variables like C<CFLAGS> or C<LDFLAGS>, and this allows you to manipulate
+those variables without doing space quoting and other messy mucky stuff.
+
+The intent is to use this from L<alienfile> to deal with hierarchical
+prerequisites.
+
+=head1 CAVEATS
+
+Not especially fast.
+
+=head1 SEE ALSO
+
+L<Env>
+
+=cut
+
 sub TIEARRAY
 {
   my($class, $name) = @_;

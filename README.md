@@ -2,6 +2,37 @@
 
 Environment variables for arguments as array
 
+# SYNOPSIS
+
+    # Tie Interface
+    use Env::ShellWords;
+    tie my @CFLAGS,   'CFLAGS';
+    tie my @LDFLAGS,  'LDFLAGS';
+    
+    unshift @CFLAGS, '-I/foo/include';
+    push @CFLAGS, '-DFOO=1';
+    
+    unshift @LDFLAGS, '-L/foo/lib';
+    push @LDFLAGS, '-lfoo';
+
+# DESCRIPTION
+
+This module provides an array like interface to environment variables
+that contain flags.  For example Autoconf can uses the environment
+variables like `CFLAGS` or `LDFLAGS`, and this allows you to manipulate
+those variables without doing space quoting and other messy mucky stuff.
+
+The intent is to use this from [alienfile](https://metacpan.org/pod/alienfile) to deal with hierarchical
+prerequisites.
+
+# CAVEATS
+
+Not especially fast.
+
+# SEE ALSO
+
+[Env](https://metacpan.org/pod/Env)
+
 # AUTHOR
 
 Graham Ollis <plicease@cpan.org>
