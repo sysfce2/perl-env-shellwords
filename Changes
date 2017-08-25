@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - customize join and split with callbacks
 
 0.01      2017-02-16 20:41:09 +1100
   - initial version

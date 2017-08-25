@@ -157,4 +157,20 @@ subtest 'export' => sub {
 
 };
 
+subtest 'custom cb' => sub {
+
+  local $ENV{FOO} = 'one:two:three';
+  
+  tie my @FOO, 'Env::ShellWords', 'FOO',
+    sub { split /:/, $_[0] },
+    sub { join ':', @_ };
+  
+  is(\@FOO, [qw( one two three )], 'fetch');
+  
+  push @FOO, 'foo';
+  unshift @FOO, 'bar';
+  
+  is(\@FOO, [qw( bar one two three foo )], 'fetch');
+};
+
 done_testing;

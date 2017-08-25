@@ -6,12 +6,12 @@ Environment variables for arguments as array
 
     # Tie Interface
     use Env::ShellWords;
-    tie my @CFLAGS,   'CFLAGS';
-    tie my @LDFLAGS,  'LDFLAGS';
+    tie my @CFLAGS,  'Env::ShellWords', 'CFLAGS';
+    tie my @LDFLAGS, 'Env::ShellWords', 'LDFLAGS';
 
     # same thing with import interface:
     use Env::ShellWords qw( @CFLAGS @LDFLAGS );
-    
+
     # usage:
     $ENV{CFLAGS} = '-DBAR=1';
     unshift @CFLAGS, '-I/foo/include';
@@ -33,10 +33,24 @@ those variables without doing space quoting and other messy mucky stuff.
 The intent is to use this from [alienfile](https://metacpan.org/pod/alienfile) to deal with hierarchical
 prerequisites.
 
+You can provide split and join callbacks when you tie:
+
+    use Env::ShellWords;
+    # split on any space, ignore quotes
+    tie my @FOO, 'Env::ShellWords',
+      sub { split /\s+/, $_[0] },
+      sub { join ' ', @_ };
+
+Which may be useful if you have to split on words on an operating
+system with a different specification.
+
 # CAVEATS
 
 Not especially fast.  `undef` gets mapped to the empty string `''`
 since `undef` doesn't have a meaning as an argument in a string.
+
+Writing to an environment variable using this interface is inherently
+lossy.
 
 # SEE ALSO
 
