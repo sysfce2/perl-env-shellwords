@@ -1,27 +1,29 @@
-# Env::ShellWords [![Build Status](https://secure.travis-ci.org/plicease/Env-ShellWords.png)](http://travis-ci.org/plicease/Env-ShellWords)
+# Env::ShellWords ![linux](https://github.com/plicease/Env-ShellWords/workflows/linux/badge.svg) ![macos](https://github.com/plicease/Env-ShellWords/workflows/macos/badge.svg) ![windows](https://github.com/plicease/Env-ShellWords/workflows/windows/badge.svg) ![cygwin](https://github.com/plicease/Env-ShellWords/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/plicease/Env-ShellWords/workflows/msys2-mingw/badge.svg)
 
 Environment variables for arguments as array
 
 # SYNOPSIS
 
-    # Tie Interface
-    use Env::ShellWords;
-    tie my @CFLAGS,  'Env::ShellWords', 'CFLAGS';
-    tie my @LDFLAGS, 'Env::ShellWords', 'LDFLAGS';
+```perl
+# Tie Interface
+use Env::ShellWords;
+tie my @CFLAGS,  'Env::ShellWords', 'CFLAGS';
+tie my @LDFLAGS, 'Env::ShellWords', 'LDFLAGS';
 
-    # same thing with import interface:
-    use Env::ShellWords qw( @CFLAGS @LDFLAGS );
+# same thing with import interface:
+use Env::ShellWords qw( @CFLAGS @LDFLAGS );
 
-    # usage:
-    $ENV{CFLAGS} = '-DBAR=1';
-    unshift @CFLAGS, '-I/foo/include';
-    push @CFLAGS, '-DFOO=Define With Spaces';
-    
-    # now:
-    # $ENV{CFLAGS} = '-I/foo/include -DBAR=1 -DFOO=Define\\ With\\ Spaces';
-    
-    unshift @LDFLAGS, '-L/foo/lib';
-    push @LDFLAGS, '-lfoo';
+# usage:
+$ENV{CFLAGS} = '-DBAR=1';
+unshift @CFLAGS, '-I/foo/include';
+push @CFLAGS, '-DFOO=Define With Spaces';
+
+# now:
+# $ENV{CFLAGS} = '-I/foo/include -DBAR=1 -DFOO=Define\\ With\\ Spaces';
+
+unshift @LDFLAGS, '-L/foo/lib';
+push @LDFLAGS, '-lfoo';
+```
 
 # DESCRIPTION
 
@@ -35,11 +37,13 @@ prerequisites.
 
 You can provide split and join callbacks when you tie:
 
-    use Env::ShellWords;
-    # split on any space, ignore quotes
-    tie my @FOO, 'Env::ShellWords',
-      sub { split /\s+/, $_[0] },
-      sub { join ' ', @_ };
+```perl
+use Env::ShellWords;
+# split on any space, ignore quotes
+tie my @FOO, 'Env::ShellWords',
+  sub { split /\s+/, $_[0] },
+  sub { join ' ', @_ };
+```
 
 Which may be useful if you have to split on words on an operating
 system with a different specification.
