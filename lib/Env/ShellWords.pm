@@ -13,10 +13,10 @@ use Text::ParseWords qw( shellwords );
  use Env::ShellWords;
  tie my @CFLAGS,  'Env::ShellWords', 'CFLAGS';
  tie my @LDFLAGS, 'Env::ShellWords', 'LDFLAGS';
-
+ 
  # same thing with import interface:
  use Env::ShellWords qw( @CFLAGS @LDFLAGS );
-
+ 
  # usage:
  $ENV{CFLAGS} = '-DBAR=1';
  unshift @CFLAGS, '-I/foo/include';

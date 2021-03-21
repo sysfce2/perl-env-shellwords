@@ -6,7 +6,7 @@ subtest 'fetch' => sub {
   local $ENV{FOO} = 'one two\\ two three';
 
   tie my @FOO, 'Env::ShellWords', 'FOO';
-  
+
   is $FOO[0], 'one';
   is $FOO[1], 'two two';
   is $FOO[2], 'three';
@@ -23,11 +23,11 @@ subtest 'store' => sub {
 
   $FOO[2] = 'three three';
   $FOO[3] = '4';
-  
+
   is $ENV{FOO}, 'one two\\ two three\\ three 4 five six';
 
   $FOO[7] = 'seven';
-  
+
   is $ENV{FOO}, 'one two\\ two three\\ three 4 five six \'\' seven';
 
 };
@@ -59,7 +59,7 @@ subtest 'clear' => sub {
   tie my @FOO, 'Env::ShellWords', 'FOO';
 
   @FOO = ();
-  
+
   is $ENV{FOO}, '';
 
 };
@@ -100,9 +100,9 @@ subtest 'pop' => sub {
   tie my @FOO, 'Env::ShellWords', 'FOO';
 
   is shift(@FOO), 'one';
-  
+
   is $ENV{FOO}, 'two\\ two three four five six';
-  
+
   is shift(@FOO), 'two two';
 
   is $ENV{FOO}, 'three four five six';
@@ -116,12 +116,12 @@ subtest 'unshift' => sub {
   tie my @FOO, 'Env::ShellWords', 'FOO';
 
   is unshift(@FOO, qw( roger wilco )), 8;
-  
+
   is $ENV{FOO}, 'roger wilco one two\\ two three four five six';
 
   is unshift(@FOO, 'roger wilco'), 9;
 
-  is $ENV{FOO}, 'roger\\ wilco roger wilco one two\\ two three four five six';  
+  is $ENV{FOO}, 'roger\\ wilco roger wilco one two\\ two three four five six';
 
 };
 
@@ -132,7 +132,7 @@ subtest 'delete' => sub {
   tie my @FOO, 'Env::ShellWords', 'FOO';
 
   is delete($FOO[1]), 'two two';
-  
+
   is $ENV{FOO}, 'one \'\' three four five six';
 
 };
@@ -140,7 +140,7 @@ subtest 'delete' => sub {
 subtest 'exists' => sub {
 
   local $ENV{FOO} = 'one two\\ two three four five six';
-  
+
   tie my @FOO, 'Env::ShellWords', 'FOO';
 
   is exists($FOO[1]), T();
@@ -160,16 +160,16 @@ subtest 'export' => sub {
 subtest 'custom cb' => sub {
 
   local $ENV{FOO} = 'one:two:three';
-  
+
   tie my @FOO, 'Env::ShellWords', 'FOO',
     sub { split /:/, $_[0] },
     sub { join ':', @_ };
-  
+
   is(\@FOO, [qw( one two three )], 'fetch');
-  
+
   push @FOO, 'foo';
   unshift @FOO, 'bar';
-  
+
   is(\@FOO, [qw( bar one two three foo )], 'fetch');
 };
 
