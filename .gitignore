@@ -1,2 +1,4 @@
 /Env-ShellWords-*
 /.build
+*.old
+*.orig

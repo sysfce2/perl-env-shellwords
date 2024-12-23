@@ -1,4 +1,4 @@
-# Env::ShellWords ![linux](https://github.com/PerlAlien/Env-ShellWords/workflows/linux/badge.svg) ![macos](https://github.com/PerlAlien/Env-ShellWords/workflows/macos/badge.svg) ![windows](https://github.com/PerlAlien/Env-ShellWords/workflows/windows/badge.svg) ![cygwin](https://github.com/PerlAlien/Env-ShellWords/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/PerlAlien/Env-ShellWords/workflows/msys2-mingw/badge.svg)
+# Env::ShellWords ![linux](https://github.com/PerlAlien/Env-ShellWords/workflows/linux/badge.svg) ![macos](https://github.com/PerlAlien/Env-ShellWords/workflows/macos/badge.svg) ![windows](https://github.com/PerlAlien/Env-ShellWords/workflows/windows/badge.svg)
 
 Environment variables for arguments as array
 
@@ -66,7 +66,7 @@ Graham Ollis <plicease@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2017 by Graham Ollis.
+This software is copyright (c) 2017-2024 by Graham Ollis.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
